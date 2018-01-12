@@ -1,9 +1,31 @@
 # Unreleased (in `master`)
 
-## Changes
+## Breaking Changes
 
+- Updated to [Babel 7](https://babeljs.io/blog/2018/08/27/7.0.0)
+  - [`babel.runtime` config](https://github.com/insin/nwb/blob/master/docs/Configuration.md#runtime-object--false) no longer accepts a `String` to enable an additional, named feature.
+
+    Pass an `Object` with plugin options instead.
+
+  - Support for tests in `*-test.js` files has been removed, as `@babel-core` no longer supports pattern matching them to ignore them when co-located in `src/`.
+
+    Rename these to `*.test.js` instead.
+
+## Added
+
+- Added [`babel.proposals` config](https://github.com/insin/nwb/blob/master/docs/Configuration.md#proposals-object--false) to configure use of Babel's proposal plugins.
+
+## Changed
+
+- [React Hot Loader](https://github.com/gaearon/react-hot-loader) is now used to handle Hot Module Reloading for React apps, as babel-plugin-react-transform is deprecated and doesn't support Babel 7.
 - Replaced use of `UglifyJsPlugin` with `TerserWebpackPlugin`.
   - Deprecated `webpack.uglify` config, which has been renamed to [`webpack.terser`](https://github.com/insin/nwb/blob/master/docs/Configuration.md#uglify-object--false).
+
+## Deprecated
+
+- `babel.stage` config is deprecated, as Babel's `stage-X` presets were removed in Babel 7 - if you provide it, nwb will warn you and enable Babel proposal plugins equivalent to the given stage number at the time the `stage-X` presets were removed.
+
+  Use [`babel.proposals` config](https://github.com/insin/nwb/blob/master/docs/Configuration.md#proposals-object--false) instead if you want to toggle some or all additional proposal plugin on.
 
 ## Dependencies
 
